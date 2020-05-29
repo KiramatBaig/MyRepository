@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	public Transform aimTarget;
-	float speed = 3f; 
+	float speed = 3f;
+	float force = 10; 
 
 	bool hitting;
 
@@ -39,7 +40,16 @@ public class Player : MonoBehaviour
 	{
 		transform.Translate(new Vector3(h, 0, v ) * speed * Time.deltaTime );
 	}
-	
-        
+	 
     }
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Ball"))
+	{
+			Vector3 dir = aimTarget.position - transform.position;
+			other.GetComponent<Rigidbody>().velocity = dir.normalized * force;
+	}
+
+
+}
 }
