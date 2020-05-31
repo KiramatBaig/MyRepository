@@ -6,7 +6,8 @@ public class Player : MonoBehaviour
 {
 	public Transform aimTarget;
 	float speed = 3f;
-	float force = 10; 
+	float force = 6;
+	
 
 	bool hitting;
 
@@ -19,8 +20,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      	float h = Input.GetAxisRaw("Horizontal");
-	float v = Input.GetAxisRaw("Vertical");
+      	float h = Input.GetAxisRaw("Vertical");
+	float v = Input.GetAxisRaw("Horizontal");
 
 	if(Input.GetKeyDown(KeyCode.F))
 	{
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
 		if (other.CompareTag("Ball"))
 	{
 			Vector3 dir = aimTarget.position - transform.position;
-			other.GetComponent<Rigidbody>().velocity = dir.normalized * force;
+			other.GetComponent<Rigidbody>().velocity = dir.normalized * force + new Vector3(0, 5, 0);
 	}
 
 
